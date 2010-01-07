@@ -23,10 +23,7 @@ class Net_Carrier_Detect_MobileJp
 
     static function detect($str, $return_val = array())
     {
-        $return_val = array_merge(
-            self::$_detect_value,
-            $return_val
-        );
+        $return_val += self::$_detect_value;
 
 
         switch (strtolower($str)) {

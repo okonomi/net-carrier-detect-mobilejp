@@ -52,4 +52,31 @@ class Net_Carrier_Detect_MobileJpTest extends PHPUnit_Framework_TestCase
             }
         }
     }
+
+    public function testChangeDetectValues()
+    {
+        $detect_values = array(
+            Net_Carrier_Detect_MobileJp::MOBILE_NONMOBILE => 'a',
+            Net_Carrier_Detect_MobileJp::MOBILE_DOCOMO    => 'b',
+        );
+        $expected = array(
+            'foo'      => 'a',
+            'docomo'   => 'b',
+            'softbank' => 'softbank',
+            'au'       => 'au',
+            'willcom'  => 'willcom',
+            'emobile'  => 'emobile',
+        );
+
+        foreach ($expected as $value => $expect) {
+            try {
+                $this->assertEquals(
+                    $expect,
+                    Net_Carrier_Detect_MobileJp::detect($value, $detect_values));
+            } catch (PHPUnit_Framework_ExpectationFailedException $e) {
+                echo "fail: value=$value, expect=$expect", PHP_EOL;
+                throw $e;
+            }
+        }
+    }
 }
