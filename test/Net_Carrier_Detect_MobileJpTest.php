@@ -11,12 +11,6 @@ class Net_Carrier_Detect_MobileJpTest extends PHPUnit_Framework_TestCase
 
     public function testDetect()
     {
-        $detect_values = array(
-            Net_Carrier_Detect_MobileJp::MOBILE_NONMOBILE => 'nonmobile',
-            Net_Carrier_Detect_MobileJp::MOBILE_DOCOMO    => 'docomo',
-            Net_Carrier_Detect_MobileJp::MOBILE_SOFTBANK  => 'softbank',
-            Net_Carrier_Detect_MobileJp::MOBILE_AU        => 'au',
-        );
         $expected = array(
             'i'      => 'docomo',
             'I'      => 'docomo',
@@ -38,13 +32,20 @@ class Net_Carrier_Detect_MobileJpTest extends PHPUnit_Framework_TestCase
             'au'    => 'au',
             'kddi'  => 'au',
             'Ezweb' => 'au',
+
+            'airh"'    => 'willcom',
+            'air-edge' => 'willcom',
+            'willcom'  => 'willcom',
+
+            'em'      => 'emobile',
+            'emobile' => 'emobile',
         );
 
         foreach ($expected as $value => $expect) {
             try {
                 $this->assertEquals(
                     $expect,
-                    Net_Carrier_Detect_MobileJp::detect($value, $detect_values));
+                    Net_Carrier_Detect_MobileJp::detect($value));
             } catch (PHPUnit_Framework_ExpectationFailedException $e) {
                 echo "fail: value=$value, expect=$expect", PHP_EOL;
                 throw $e;
