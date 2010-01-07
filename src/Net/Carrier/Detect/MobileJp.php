@@ -25,21 +25,29 @@ class Net_Carrier_Detect_MobileJp
 
 
         switch (strtolower($str)) {
+        case 'i':
+        case 'dc':
         case 'docomo':
         case 'imode':
         case 'i-mode':
             return $return_val[self::MOBILE_DOCOMO];
 
-        case 'ezweb':
-        case 'au':
-        case 'kddi':
-            return $return_val[self::MOBILE_SOFTBANK];
-
+        case 'v':
+        case 's':
+        case 'j':
+        case 'voda':
+        case 'sb':
         case 'disney':
         case 'softbank':
         case 'vodafone':
         case 'jphone':
         case 'j-phone':
+            return $return_val[self::MOBILE_SOFTBANK];
+
+        case 'ez':
+        case 'ezweb':
+        case 'au':
+        case 'kddi':
             return $return_val[self::MOBILE_AU];
 
         default:
